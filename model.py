@@ -16,8 +16,7 @@ class Operations():
     
 
     def fetchById(self, jsonFile):
-        
-    
+       
         for ids, x in enumerate(self.data):
             for i in x:
     

@@ -1,6 +1,7 @@
 from flask import Flask,jsonify,request, jsonify
 from flask_restx import Api, Resource,fields
 from model import *
+from decorator import *
 import json
 
 model = Operations()
@@ -15,10 +16,10 @@ class DataOparetor(Resource):
             else:
                 data = model.fetch()
                 
-            return jsonify(data)
+            return smdResponce(data = data, statusCode=200)
         
         except:
-            return {"Note": "Error"}
+            return smdResponce(data = None, statusCode=400)
         
         
     def put(self):
@@ -28,10 +29,10 @@ class DataOparetor(Resource):
             if dataByUser != None: 
                 data = model.update(dataByUser)
             
-            return jsonify(data)
+            return smdResponce(data = data, statusCode=200)
             
         except:
-            return {"Note" : "Error"}
+            return smdResponce(data = None, statusCode=400)
 
 
     def post(self):
@@ -41,10 +42,10 @@ class DataOparetor(Resource):
             if dataByUser != None:         
                 data = model.add(dataByUser)
                 
-            return jsonify(data)
+            return smdResponce(data = data, statusCode=200)
             
         except:
-            return {"Note" : "Error"}
+            return smdResponce(data = None, statusCode=400)
         
         
     def delete(self):
@@ -54,11 +55,11 @@ class DataOparetor(Resource):
             data = model.delete(dataByUser) 
             
             
-            return jsonify(data)
+            return smdResponce(data = data, statusCode=200)
             
         
         except:
-            return {"Note" : "Error"}
+            return smdResponce(data = None, statusCode=400)
         
                 
             

@@ -15,9 +15,24 @@ class Operations():
 
     
 
+    def fetchById(self, jsonFile):
+        
+    
+        for ids, x in enumerate(self.data):
+            for i in x:
+    
+                if x[i] == jsonFile['id']:
+                          
+                    return self.data[ids]
+                        
+        return None
+        
+        
+
     def add(self, jsonFile):
         
         self.data.append(jsonFile)
+           
         js = json.dumps(self.data)
       
         with open('data.json', "w") as outfile:
@@ -47,5 +62,34 @@ class Operations():
             outfile.write(js)
             
         return self.data
+    
+    
+    
+    def delete(self, jsonFile):
+        
+        for ids, x in enumerate(self.data):
+            for i in x:
+    
+                if x[i] == jsonFile['id']:
+                    del self.data[ids]
+        
+        
+        js = json.dumps(self.data)
+        
+        with open("data.json", "w") as outfile:
+            outfile.write(js)
+            
+        return self.data
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
             
         

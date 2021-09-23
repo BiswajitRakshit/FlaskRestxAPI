@@ -8,8 +8,15 @@ model = Operations()
 class DataOparetor(Resource):
     def get(self):
         try:
-            data = model.fetch()
+            dataByUser = request.get_json()
+            
+            if dataByUser != None:
+                data = model.fetchById(dataByUser)
+            else:
+                data = model.fetch()
+                
             return jsonify(data)
+        
         except:
             return {"Note": "Error"}
         
@@ -18,7 +25,8 @@ class DataOparetor(Resource):
         try:
             dataByUser = request.get_json()
         
-            data = model.update(dataByUser)
+            if dataByUser != None: 
+                data = model.update(dataByUser)
             
             return jsonify(data)
             
@@ -37,6 +45,23 @@ class DataOparetor(Resource):
             
         except:
             return {"Note" : "Error"}
+        
+        
+    def delete(self):
+        try:
+            dataByUser =request.get_json()
+            
+            data = model.delete(dataByUser) 
+            
+            
+            return jsonify(data)
+            
+        
+        except:
+            return {"Note" : "Error"}
+        
+                
+            
             
         
     

@@ -13,13 +13,16 @@ def getMessage(statusCode, method):
             message = "The resource has been fetched and is transmitted in DATA."
             
         if method == 'post':
-            message = "The resource describing the result of the action is added in DATA."
+            message = "The resource has been added and is transmitted in DATA."
             
         if method == 'put':
-             message = "The Request has succeeded"
+             message = "The Update Request has succeeded."
              
         if method == 'delete':
-            message = "Request method deletes the specified resource"
+            message = "Delete Request deletes the specified resource."
+            
+        if method == None:
+            message = "Action is not found."
             
     else:
         message = "Error from status Code: " + str(statusCode)
@@ -36,7 +39,6 @@ def smdResponce(data = None, method=None):
         
         statusCode = 200
         message = getMessage(statusCode, method)
-        
         
         responce = {
             "data" : data,

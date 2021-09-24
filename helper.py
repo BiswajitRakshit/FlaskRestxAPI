@@ -10,16 +10,16 @@ def getMessage(statusCode, method):
         
     elif statusCode == 200:
         if method == 'get':
-            message = "The resource has been fetched and is transmitted in DATA."
+            message = "Success, The resource has been fetched and is transmitted in DATA."
             
         if method == 'post':
-            message = "The resource has been added and is transmitted in DATA."
+            message = "Success, The resource has been added and is transmitted in DATA."
             
         if method == 'put':
-             message = "The Update Request has succeeded."
+             message = "OK, The Update Request has succeeded."
              
         if method == 'delete':
-            message = "Delete Request deletes the specified resource."
+            message = "OK, Delete Request deletes the specified resource."
             
         if method == None:
             message = "Action is not found."

@@ -6,7 +6,7 @@ from flask import jsonify
 def getMessage(statusCode, method):
     
     if statusCode == 400:
-        message = "400 Bad Request"
+        message = "Bad Request, Please don't repeat the Request without modification"
         
     elif statusCode == 200:
         if method == 'get':

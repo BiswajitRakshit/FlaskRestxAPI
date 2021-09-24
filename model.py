@@ -15,22 +15,21 @@ class Operations():
 
     
 
-    def fetchById(self, jsonFile):
+    def fetchById(self, ids):
        
-        for ids, x in enumerate(self.data):
-            for i in x:
+        for i, x in enumerate(self.data):
+            for t in x:
     
-                if x[i] == jsonFile['id']:
-                          
-                    return self.data[ids]
+                if x[t] == ids:
+                    return self.data[i]
                         
         return None
         
         
 
-    def add(self, jsonFile):
+    def add(self, dataByUser):
         
-        self.data.append(jsonFile)
+        self.data.append(dataByUser)
            
         js = json.dumps(self.data)
       
@@ -41,18 +40,18 @@ class Operations():
     
     
     
-    def update(self, jsonFile):
+    def update(self, dataByUser):
         
-        for ids, x in enumerate(self.data):
-            for i in x:
+        for i, x in enumerate(self.data):
+            for t in x:
     
-                if x[i] == jsonFile['id']:
+                if x[t] == dataByUser['id']:
                           
-                    if jsonFile.get('name') != None:
-                        self.data[ids]['name'] = jsonFile['name']
+                    if dataByUser.get('name') != None:
+                        self.data[i]['name'] = dataByUser['name']
                         
-                    if jsonFile.get('age') != None:
-                        self.data[ids]['age'] = jsonFile['age']
+                    if dataByUser.get('age') != None:
+                        self.data[i]['age'] = dataByUser['age']
                         
                         
         js = json.dumps(self.data)
@@ -64,13 +63,13 @@ class Operations():
     
     
     
-    def delete(self, jsonFile):
+    def delete(self, ids):
         
-        for ids, x in enumerate(self.data):
-            for i in x:
+        for i, x in enumerate(self.data):
+            for t in x:
     
-                if x[i] == jsonFile['id']:
-                    del self.data[ids]
+                if x[t] == ids:
+                    del self.data[i]
         
         
         js = json.dumps(self.data)

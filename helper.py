@@ -3,7 +3,7 @@ import json
 from flask import jsonify
 
 
-def getMessage(statusCode, method):
+def getMessage(statusCode, method=None):
     
     if statusCode == 400:
         message = "Bad Request, Please don't repeat the Request without modification"

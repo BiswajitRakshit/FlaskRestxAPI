@@ -6,7 +6,7 @@ import json
 
 model = Operations()
 
-functions = {"1": model.fetch,"2": model.fetchById, "3": model.update, "4": model.add, "5": model.delete}
+functions = {"1": model.fetch, "2": model.fetchById, "3": model.update, "4": model.add, "5": model.delete}
 
 class DataOparetor(Resource):
     def get(self):

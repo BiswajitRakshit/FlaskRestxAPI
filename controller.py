@@ -6,22 +6,28 @@ import json
 
 model = Operations()
 
+functions = {"1": model.fetch,"2": model.fetchById, "3": model.update, "4": model.add, "5": model.delete}
+
 class DataOparetor(Resource):
     def get(self):
         try:
+            
             dataByUser = request.get_json()
             
             if dataByUser != None:
                 ids = dataByUser['id']
-                data = model.fetchById(ids)
+                count = "2"
+                data = functions[count](ids)
                 
-            else:
-                data = model.fetch()
+            else:            
+                count = "1"
+                data = functions[count]()
+                
                 
             return smdResponce(data = data, method = "get")
         
         except:
-            return smdResponce(data = None)
+            return smdResponce()
         
         
     def put(self):
@@ -29,12 +35,13 @@ class DataOparetor(Resource):
             dataByUser = request.get_json()
         
             if dataByUser != None: 
-                data = model.update(dataByUser)
+                count = "3"
+                data = functions[count](dataByUser)
             
             return smdResponce(data = data, method = "put")
             
         except:
-            return smdResponce(data = None)
+            return smdResponce()
 
 
     def post(self):
@@ -42,12 +49,13 @@ class DataOparetor(Resource):
             dataByUser = request.get_json()
             
             if dataByUser != None:         
-                data = model.add(dataByUser)
+                count = "4"
+                data = functions[count](dataByUser)
                 
             return smdResponce(data = data, method = "post")
             
         except:
-            return smdResponce(data = None)
+            return smdResponce()
         
         
     def delete(self):
@@ -56,14 +64,15 @@ class DataOparetor(Resource):
             
             if dataByUser != None:
                 ids = dataByUser['id']
-                data = model.delete(ids) 
+                count = "5"
+                data = functions[count](ids) 
             
             
             return smdResponce(data = data, method = "delete")
             
         
         except:
-            return smdResponce(data = None)
+            return smdResponce()
         
                 
             

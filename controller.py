@@ -3,6 +3,7 @@ from flask_restx import Api, Resource,fields
 from model import *
 from helper import *
 import json
+from json.decoder import JSONDecodeError
 
 def getFunctions(key):
     model = Operations()
@@ -13,30 +14,24 @@ class DataOparetor(Resource):
     
     def get(self):
         try:
-            dataByUser = request.get_json()
+            dataByUser = request.json
+            key = "1"
+            data = getFunctions(key)()
             
-            if dataByUser == None: 
-                key = "1"
-                data = getFunctions(key)()
-        
             if  dataByUser != None:
                 key = "2"
                 ids = dataByUser['id']
                 data = getFunctions(key)(ids)
                 
-            
-                
-         
             return getCustomResponse(success=True, 
                                      message="Success, The Resource has been fetched and is transmitted in DATA.", 
                                      data=data, status_code=200)
-    
+                
         except Exception as e:
             return getCustomResponse(success=False, 
-                                     message=str(e), 
-                                     data=None, status_code=400)
-        
-        
+                                      message=str(e), 
+                                      data=None, status_code=400)
+    
     def put(self):
         try:
             dataByUser = request.json
@@ -47,7 +42,7 @@ class DataOparetor(Resource):
             
             return getCustomResponse(success=True, 
                                      message="OK, Update Request has succeeded.", 
-                                     data=data, status_code=200)
+                                     data=data, status_code=201)
             
         except Exception as e:
             return getCustomResponse(success=False, 

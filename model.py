@@ -7,17 +7,17 @@ class Operations():
         f = open('data.json',)
         self.data = json.load(f)
 
-    #
+    # Fetch all data
     def fetch(self):
         return self.data
 
-    #
+    # Fetch by specific Id
     def fetchById(self, ids):
         for x in self.data:
             if any(map(lambda m: x[str(m)] == ids, list(x))):
                 return x
      
-    #
+    # Adding Data given by User
     def add(self, dataByUser):
         self.data.append(dataByUser)
         
@@ -27,17 +27,16 @@ class Operations():
             outfile.write(js)
             
         return self.data
-     
-    #
+    
+    # Updating Data given by User
     def update(self, dataByUser):
         for x in self.data:
             if any(map(lambda m: x[str(m)] == dataByUser['id'], list(x))):
-                          
-                if dataByUser.get('name') != None:
-                    x['name'] = dataByUser['name']
-                    
-                if dataByUser.get('age') != None:
-                    x['age'] = dataByUser['age']
+                
+                # Getting Common keys in Data and dataByUser
+                keys = list(set(list(x)).intersection(list(dataByUser)))
+                for k in keys:
+                    x[k] = dataByUser[k]
                     
         #Writting Json Data
         js = json.dumps(self.data)
@@ -46,9 +45,8 @@ class Operations():
             
         return self.data
  
-    #
+    # Deleting Data of perticular Id spectified by User
     def delete(self, ids):
-        
         for i, x in enumerate(self.data):
             if any(map(lambda m: x[str(m)] == ids, list(x))):
     

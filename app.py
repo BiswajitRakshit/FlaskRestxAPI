@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 api = Api(app)
 
-api.add_resource(DataOparetor, '/test')
+api.add_resource(DataOparetor, '/operations')
 
 if __name__ == '__main__':
     app.run(debug = c._config__DEBUG)

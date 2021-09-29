@@ -4,80 +4,90 @@ from model import *
 from helper import *
 import json
 
-model = Operations()
-
-functions = {"1": model.fetch, "2": model.fetchById, "3": model.update, "4": model.add, "5": model.delete}
+def getFunctions(key):
+    model = Operations()
+    functions = {"1": model.fetch, "2": model.fetchById, "3": model.update, "4": model.add, "5": model.delete}
+    return functions[key]
 
 class DataOparetor(Resource):
+    
     def get(self):
         try:
-            
             dataByUser = request.get_json()
             
-            if dataByUser != None:
-                ids = dataByUser['id']
-                count = "2"
-                data = functions[count](ids)
-                
-            else:            
-                count = "1"
-                data = functions[count]()
-                
-                
-            return smdResponce(data = data, method = "get")
+            if dataByUser == None: 
+                key = "1"
+                data = getFunctions(key)()
         
-        except:
-            return smdResponce()
+            if  dataByUser != None:
+                key = "2"
+                ids = dataByUser['id']
+                data = getFunctions(key)(ids)
+                
+            
+                
+         
+            return getCustomResponse(success=True, 
+                                     message="Success, The Resource has been fetched and is transmitted in DATA.", 
+                                     data=data, status_code=200)
+    
+        except Exception as e:
+            return getCustomResponse(success=False, 
+                                     message=str(e), 
+                                     data=None, status_code=400)
         
         
     def put(self):
         try:
-            dataByUser = request.get_json()
+            dataByUser = request.json
         
             if dataByUser != None: 
-                count = "3"
-                data = functions[count](dataByUser)
+                key = "3"
+                data = getFunctions(key)(dataByUser)
             
-            return smdResponce(data = data, method = "put")
+            return getCustomResponse(success=True, 
+                                     message="OK, Update Request has succeeded.", 
+                                     data=data, status_code=200)
             
-        except:
-            return smdResponce()
+        except Exception as e:
+            return getCustomResponse(success=False, 
+                                     message=str(e), 
+                                     data=None, status_code=400)
 
 
     def post(self):
         try:
-            dataByUser = request.get_json()
+            dataByUser = request.json
             
             if dataByUser != None:         
-                count = "4"
-                data = functions[count](dataByUser)
+                key = "4"
+                data = getFunctions(key)(dataByUser)
                 
-            return smdResponce(data = data, method = "post")
+            return getCustomResponse(success=True, 
+                                     message="Success, The Resource has been added and is transmitted in DATA.", 
+                                     data=data, status_code=200)
             
-        except:
-            return smdResponce()
+        except Exception as e:
+            return getCustomResponse(success=False, 
+                                     message=str(e), 
+                                     data=None, status_code=400)
         
         
     def delete(self):
         try:
-            dataByUser =request.get_json()
+            dataByUser =request.json
             
             if dataByUser != None:
                 ids = dataByUser['id']
-                count = "5"
-                data = functions[count](ids) 
+                key = "5"
+                data = getFunctions(key)(ids) 
             
+            return getCustomResponse(success=True, 
+                                     message="OK, Delete Request deletes the specified resource.", 
+                                     data=data, status_code=200)
             
-            return smdResponce(data = data, method = "delete")
-            
-        
-        except:
-            return smdResponce()
-        
-                
-            
-            
-        
-    
-    
+        except Exception as e:
+            return getCustomResponse(success=False, 
+                                     message=str(e), 
+                                     data=None, status_code=400)
         

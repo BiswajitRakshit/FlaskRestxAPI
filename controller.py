@@ -3,7 +3,6 @@ from flask_restx import Api, Resource,fields
 from model import *
 from helper import *
 import json
-from json.decoder import JSONDecodeError
 
 def getFunctions(key):
     model = Operations()

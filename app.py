@@ -6,7 +6,6 @@ from config import config
 c = config()
 
 app = Flask(__name__)
-
 api = Api(app)
 
 api.add_resource(DataOparetor, '/operations')

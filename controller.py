@@ -15,7 +15,7 @@ class DataOparetor(Resource):
         try:
             dataByUser = request.json
             data = getFunctions(1)()
-            if  dataByUser != None:
+            if dataByUser is not None:
                 ids = dataByUser['id']
                 data = getFunctions(2)(ids)
                 

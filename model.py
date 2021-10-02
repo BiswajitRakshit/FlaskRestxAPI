@@ -33,13 +33,13 @@ class Operations():
         
         # for x in self.data:
         #     if x['id'] == dataByUser['id']:
-                
+        #
         #         # Getting Common keys in Data and dataByUser
         #         keys = list(set(list(x)).intersection(list(dataByUser)))
         #         for k in keys:
         #             x[k] = dataByUser[k]
                     
-        #Writting Json Data
+        # Writting Json Data
         js = json.dumps(self.data)
         with open("data.json", "w") as outfile:
             outfile.write(js)
@@ -55,7 +55,7 @@ class Operations():
         #     if x['id'] == ids:
         #             del self.data[i]
         
-        #Writting Json Data
+        # Writting Json Data
         js = json.dumps(self.data)
         with open("data.json", "w") as outfile:
             outfile.write(js)

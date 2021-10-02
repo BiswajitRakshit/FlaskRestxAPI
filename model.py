@@ -15,7 +15,6 @@ class Operations():
     def fetchById(self, ids):
         return next(x for x in self.data if x['id'] == ids)
             
-     
     # Adding Data given by User
     def add(self, dataByUser):
         self.data.append(dataByUser)

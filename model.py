@@ -11,7 +11,7 @@ class Operations():
     def fetch(self):
         return self.data
 
-    # Fetch by specific Id
+    # Fetch by returning all data with specific Id using spacial method next which returns the iterable as dictionary
     def fetchById(self, ids):
         return next(x for x in self.data if x['id'] == ids)
             
@@ -28,7 +28,7 @@ class Operations():
     
     # Updating Data given by User
     def update(self, dataByUser):
-        
+        # next method takes the matched iterable and then update the data with the user data 
         next(x for x in self.data if x['id'] == dataByUser['id']).update(dataByUser)
         
         # for x in self.data:
@@ -49,6 +49,8 @@ class Operations():
     # Deleting Data of perticular Id spectified by User
     def delete(self, ids):
         
+        # Taking those data into dataset which is not matched with the id
+        # It is another way of deleting the data with same id
         self.data = [x for x in self.data if not x['id'] == ids]
         
         # for i, x in enumerate(self.data):
